@@ -1,0 +1,25 @@
+[package]
+name = "helloj4m6"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ch32-hal = { git = "https://github.com/ch32-rs/ch32-hal.git", features = [
+    "ch32v003j4m6",
+    "embassy",
+    "time-driver-tim2",
+    "rt",
+    "memory-x",
+] }
+# Using the same version as ch32-hal
+qingke-rt = "*"
+qingke = "*"
+
+[profile.release]
+# Symbols are not flashed to the microcontroller, so don't strip them
+strip = false
+# LLVM can perform better optimizations using a single thread
+codegen-units = 1
+lto = true
+# Optimize for size
+opt-level = "s"
